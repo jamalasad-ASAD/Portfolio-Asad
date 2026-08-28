@@ -221,7 +221,7 @@ function App() {
           <h2 className="section-title"><FaPaperPlane className="icon" /> Get In Touch</h2>
           <div className="contact-wrapper">
             <div className="contact-info">
-              <p>Main active job search kar raha hoon. Agar aapke paas koi opportunity hai toh zaroor connect karein!</p>
+            <p>I am actively looking for new job opportunities. If you have any relevant openings, I would love to connect!</p>
               <div className="info-item"><FaEnvelope /> {portfolioData.contact.email}</div>
               <div className="info-item"><FaPhone /> {portfolioData.contact.phone}</div>
             </div>
@@ -229,21 +229,21 @@ function App() {
             <form className="contact-form" onSubmit={handleSubmit}>
               <input 
                 type="text" 
-                placeholder="Aapka Naam" 
+                placeholder="Your Name" 
                 value={formData.name}
                 onChange={(e) => setFormData({...formData, name: e.target.value})}
                 required 
               />
               <input 
                 type="email" 
-                placeholder="Aapka Email" 
+                placeholder="Your Email" 
                 value={formData.email}
                 onChange={(e) => setFormData({...formData, email: e.target.value})}
                 required 
               />
               <textarea 
                 rows="4" 
-                placeholder="Aapka Message" 
+                placeholder="Type Message" 
                 value={formData.message}
                 onChange={(e) => setFormData({...formData, message: e.target.value})}
                 required
