@@ -324,7 +324,7 @@ function App() {
       </main>
 
       <footer>
-        <p>© {new Date().getFullYear()} {portfolioData.name}. Built with React.js</p>
+        <p>© {new Date().getFullYear()} {portfolioData.name}. Build By AsAd JaMaL.</p>
       </footer>
     </div>
   );
