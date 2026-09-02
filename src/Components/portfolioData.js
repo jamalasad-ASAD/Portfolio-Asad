@@ -109,7 +109,7 @@ export const portfolioData = {
   ],
 
   contact: {
-    email: "jamalasadbth@gmail.com",
+    email: "jamalasadbth1@gmail.com",
     phone: "+91 9110151719",
     github: "https://github.com/yourusername",
     linkedin: "https://linkedin.com/in/yourusername"
