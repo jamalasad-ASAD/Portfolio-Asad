@@ -58,15 +58,17 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   
+  // 📱 Added phone field to state
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     message: ''
   });
 
   const resumeUrl = "/resume.pdf";
 
-  // Initialize EmailJS with Public Key on mount
+  // Initialize EmailJS on mount
   useEffect(() => {
     emailjs.init("vXZGlrFVZVPhiQaf9");
   }, []);
@@ -80,26 +82,29 @@ function App() {
     e.preventDefault();
     setLoading(true);
 
+    // 📱 Phone number parameters include kiye hain
     const templateParams = {
       from_name: formData.name,
       user_name: formData.name,
       from_email: formData.email,
       user_email: formData.email,
+      phone_number: formData.phone,
+      user_phone: formData.phone,
       reply_to: formData.email,
       message: formData.message,
     };
 
     emailjs.send(
-      'service_fhb8e4h',   // ✅ Service ID
-      'template_96ffv3n',  // ✅ Updated Active Template ID
+      'service_fhb8e4h',
+      'template_96ffv3n',
       templateParams,
-      'vXZGlrFVZVPhiQaf9'  // ✅ Public Key
+      'vXZGlrFVZVPhiQaf9'
     )
     .then((response) => {
       console.log('SUCCESS!', response.status, response.text);
       setLoading(false);
       setSubmitted(true);
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ name: '', email: '', phone: '', message: '' });
       setTimeout(() => setSubmitted(false), 5000);
     })
     .catch((error) => {
@@ -290,6 +295,15 @@ function App() {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Your Email" 
+                required 
+              />
+              {/* 📱 Phone Number Input Added */}
+              <input 
+                type="tel" 
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Your Contact Number" 
                 required 
               />
               <textarea 
