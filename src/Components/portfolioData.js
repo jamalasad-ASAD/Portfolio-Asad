@@ -92,6 +92,13 @@ export const portfolioData = {
       github: "https://github.com/yourusername/ecommerce-app",
       live: "https://your-demo-link.netlify.app"
     },
+     {
+      title: "Photography website",
+      description: "A responsive online shopping site built with React. Features product search, category filtering, cart management, and local storage integration.",
+      tech: ["React", "JavaScript", "CSS3", "Context API"],
+      github: "https://github.com/jamalasad-ASAD/nadeem-photography",
+      live: "https://nadeem-photography.vercel.app/"
+    },
     {
       title: "Weather Forecast Dashboard",
       description: "Fetches real-time weather data using OpenWeatherMap REST API. Displays 5-day forecast, humidity levels, and dynamic background changes.",
