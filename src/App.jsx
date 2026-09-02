@@ -58,7 +58,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   
-  // 📱 Added phone field to state
+  // 📱 Contact Form State
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -82,7 +82,6 @@ function App() {
     e.preventDefault();
     setLoading(true);
 
-    // 📱 Phone number parameters include kiye hain
     const templateParams = {
       from_name: formData.name,
       user_name: formData.name,
@@ -161,15 +160,31 @@ function App() {
 
           <div className="hero-buttons">
             <a href="#projects" className="btn btn-primary">View My Projects</a>
-            <a href={resumeUrl} download="My_Resume.pdf" className="btn btn-secondary flex-btn">
+            <a href={resumeUrl} download="ASAD_JAMAL_Resume.pdf" className="btn btn-secondary flex-btn">
               <FaDownload /> Download CV
             </a>
           </div>
 
+          {/* 🔗 Updated Social Links with GitHub Profile */}
           <div className="social-links">
-            <a href={portfolioData.contact.github} target="_blank" rel="noreferrer" title="GitHub"><FaGithub size={22} /></a>
-            <a href={portfolioData.contact.linkedin} target="_blank" rel="noreferrer" title="LinkedIn"><FaLinkedin size={22} /></a>
+            <a 
+              href={portfolioData.contact.github || "https://github.com/jamalasad-ASAD"} 
+              target="_blank" 
+              rel="noreferrer" 
+              title="GitHub Profile"
+            >
+              <FaGithub size={22} />
+            </a>
+            <a 
+              href={portfolioData.contact.linkedin || "https://www.linkedin.com/in/asad-jamal-289a31248/"} 
+              target="_blank" 
+              rel="noreferrer" 
+              title="LinkedIn Profile"
+            >
+              <FaLinkedin size={22} />
+            </a>
             <a href={`mailto:${portfolioData.contact.email}`} title="Email"><FaEnvelope size={22} /></a>
+            {/* <a href={`tel:${portfolioData.contact.phone}`} title="Call Now"><FaPhone size={20} /></a> */}
           </div>
         </section>
 
@@ -263,7 +278,7 @@ function App() {
               <a href={resumeUrl} target="_blank" rel="noreferrer" className="btn btn-secondary flex-btn">
                 <FaEye /> View Resume
               </a>
-              <a href={resumeUrl} download="My_Resume.pdf" className="btn btn-primary flex-btn">
+              <a href={resumeUrl} download="ASAD_JAMAL_Resume.pdf" className="btn btn-primary flex-btn">
                 <FaDownload /> Download Resume
               </a>
             </div>
@@ -297,7 +312,6 @@ function App() {
                 placeholder="Your Email" 
                 required 
               />
-              {/* 📱 Phone Number Input Added */}
               <input 
                 type="tel" 
                 name="phone"
@@ -324,7 +338,7 @@ function App() {
       </main>
 
       <footer>
-        <p>© {new Date().getFullYear()} {portfolioData.name}. Build By AsAd JaMaL.</p>
+        <p>© {new Date().getFullYear()} {portfolioData.name}. Built By AsAd JaMaL.</p>
       </footer>
     </div>
   );
