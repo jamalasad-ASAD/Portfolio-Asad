@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import profilePic from './profile.jpg'; // 👈 src folder se direct image import
 import { portfolioData } from './Components/portfolioData';
 import { 
   FaGithub, 
@@ -16,39 +17,32 @@ import {
 } from 'react-icons/fa6';
 import './App.css';
 
-// 🔄 Continuous Looping Typewriter Effect Component
+// 🔄 Clean & Error-Free Looping Typewriter Effect Component
 function Typewriter({ text, speed = 120, pause = 1500 }) {
   const [displayedText, setDisplayedText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     let timeout;
 
-    if (!isDeleting && currentIndex < text.length) {
-      // Type forward
+    if (!isDeleting && displayedText.length < text.length) {
       timeout = setTimeout(() => {
-        setDisplayedText((prev) => prev + text[currentIndex]);
-        setCurrentIndex((prev) => prev + 1);
+        setDisplayedText(text.slice(0, displayedText.length + 1));
       }, speed);
-    } else if (!isDeleting && currentIndex === text.length) {
-      // Wait at the end before deleting
+    } else if (!isDeleting && displayedText.length === text.length) {
       timeout = setTimeout(() => {
         setIsDeleting(true);
       }, pause);
-    } else if (isDeleting && currentIndex > 0) {
-      // Delete backward
+    } else if (isDeleting && displayedText.length > 0) {
       timeout = setTimeout(() => {
-        setDisplayedText((prev) => prev.slice(0, -1));
-        setCurrentIndex((prev) => prev - 1);
+        setDisplayedText(text.slice(0, displayedText.length - 1));
       }, speed / 2);
-    } else if (isDeleting && currentIndex === 0) {
-      // Restart typing loop
+    } else if (isDeleting && displayedText.length === 0) {
       setIsDeleting(false);
     }
 
     return () => clearTimeout(timeout);
-  }, [currentIndex, isDeleting, text, speed, pause]);
+  }, [displayedText, isDeleting, text, speed, pause]);
 
   return (
     <span className="typewriter-text">
@@ -76,28 +70,33 @@ function App() {
   return (
     <div className="portfolio-app">
       {/* Top Navbar */}
-     {/* Top Navbar */}
-<nav className="navbar">
-  {/* Plain text logo */}
-  <div className="logo">PORTFOLIO</div>
-  
-  <div className="nav-links">
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#internships">Internships</a>
-    <a href="#projects">Projects</a>
-    <a href="#education">Education</a>
-    <a href="#resume">Resume</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
+      <nav className="navbar">
+        <div className="logo">PORTFOLIO</div>
+        
+        <div className="nav-links">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#internships">Internships</a>
+          <a href="#projects">Projects</a>
+          <a href="#education">Education</a>
+          <a href="#resume">Resume</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
 
       <main className="container">
-        {/* Hero / About Section */}
+        {/* Hero / About Section with Profile Picture */}
         <section id="about" className="hero-section">
+          <div className="profile-img-container">
+            <img 
+              src={profilePic} 
+              alt={portfolioData.name} 
+              className="profile-img" 
+            />
+          </div>
+
           <div className="fresher-badge">Fresher • Open to Opportunities</div>
           
-          {/* ♾️ Continuous Looping Animation */}
           <h1>
             Hi, I'm <Typewriter text={portfolioData.name} speed={120} pause={1500} />
           </h1>
@@ -221,7 +220,7 @@ function App() {
           <h2 className="section-title"><FaPaperPlane className="icon" /> Get In Touch</h2>
           <div className="contact-wrapper">
             <div className="contact-info">
-            <p>I am actively looking for new job opportunities. If you have any relevant openings, I would love to connect!</p>
+              <p>I am actively looking for new job opportunities. If you have any relevant openings, I would love to connect!</p>
               <div className="info-item"><FaEnvelope /> {portfolioData.contact.email}</div>
               <div className="info-item"><FaPhone /> {portfolioData.contact.phone}</div>
             </div>
