@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import profilePic from './profile.jpg'; // 👈 src folder se direct image import
+import emailjs from '@emailjs/browser';
+import profilePic from './profile.jpg';
 import { portfolioData } from './Components/portfolioData';
 import { 
   FaGithub, 
@@ -13,18 +14,19 @@ import {
   FaFilePdf,
   FaDownload,
   FaEye,
-  FaBriefcase
+  FaBriefcase,
+  FaBars,
+  FaXmark
 } from 'react-icons/fa6';
 import './App.css';
 
-// 🔄 Clean & Error-Free Looping Typewriter Effect Component
+// 🔄 Looping Typewriter Effect Component
 function Typewriter({ text, speed = 120, pause = 1500 }) {
   const [displayedText, setDisplayedText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     let timeout;
-
     if (!isDeleting && displayedText.length < text.length) {
       timeout = setTimeout(() => {
         setDisplayedText(text.slice(0, displayedText.length + 1));
@@ -40,7 +42,6 @@ function Typewriter({ text, speed = 120, pause = 1500 }) {
     } else if (isDeleting && displayedText.length === 0) {
       setIsDeleting(false);
     }
-
     return () => clearTimeout(timeout);
   }, [displayedText, isDeleting, text, speed, pause]);
 
@@ -53,39 +54,88 @@ function Typewriter({ text, speed = 120, pause = 1500 }) {
 }
 
 function App() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
 
   const resumeUrl = "/resume.pdf";
 
+  // Initialize EmailJS with Public Key on mount
+  useEffect(() => {
+    emailjs.init("vXZGlrFVZVPhiQaf9");
+  }, []);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // 📩 Handle EmailJS Form Submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(formData.name && formData.email && formData.message) {
+    setLoading(true);
+
+    const templateParams = {
+      from_name: formData.name,
+      user_name: formData.name,
+      from_email: formData.email,
+      user_email: formData.email,
+      reply_to: formData.email,
+      message: formData.message,
+    };
+
+    emailjs.send(
+      'service_fhb8e4h',   // ✅ Service ID
+      'template_96ffv3n',  // ✅ Updated Active Template ID
+      templateParams,
+      'vXZGlrFVZVPhiQaf9'  // ✅ Public Key
+    )
+    .then((response) => {
+      console.log('SUCCESS!', response.status, response.text);
+      setLoading(false);
       setSubmitted(true);
-      setTimeout(() => setSubmitted(false), 4000);
       setFormData({ name: '', email: '', message: '' });
-    }
+      setTimeout(() => setSubmitted(false), 5000);
+    })
+    .catch((error) => {
+      setLoading(false);
+      console.error("EmailJS Error Details:", error);
+      alert(`Failed to send message (${error.text || error.status || 'Error'}). Check console for details.`);
+    });
+  };
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
   };
 
   return (
     <div className="portfolio-app">
-      {/* Top Navbar */}
+      {/* Top Responsive Navbar */}
       <nav className="navbar">
         <div className="logo">PORTFOLIO</div>
         
-        <div className="nav-links">
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#internships">Internships</a>
-          <a href="#projects">Projects</a>
-          <a href="#education">Education</a>
-          <a href="#resume">Resume</a>
-          <a href="#contact">Contact</a>
+        <button className="menu-toggle" onClick={toggleMenu} aria-label="Toggle Menu">
+          {menuOpen ? <FaXmark size={24} /> : <FaBars size={24} />}
+        </button>
+
+        <div className={`nav-links ${menuOpen ? 'active' : ''}`}>
+          <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
+          <a href="#skills" onClick={() => setMenuOpen(false)}>Skills</a>
+          <a href="#internships" onClick={() => setMenuOpen(false)}>Internships</a>
+          <a href="#projects" onClick={() => setMenuOpen(false)}>Projects</a>
+          <a href="#education" onClick={() => setMenuOpen(false)}>Education</a>
+          <a href="#resume" onClick={() => setMenuOpen(false)}>Resume</a>
+          <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
         </div>
       </nav>
 
       <main className="container">
-        {/* Hero / About Section with Profile Picture */}
+        {/* Hero / About Section */}
         <section id="about" className="hero-section">
           <div className="profile-img-container">
             <img 
@@ -118,7 +168,7 @@ function App() {
           </div>
         </section>
 
-        {/* 💻 Technical Skills Section */}
+        {/* Technical Skills Section */}
         <section id="skills" className="section">
           <h2 className="section-title"><FaCode className="icon" /> Technical Skills</h2>
           <div className="skills-container">
@@ -131,7 +181,7 @@ function App() {
           </div>
         </section>
 
-        {/* 💼 Internship Section */}
+        {/* Internship Section */}
         {portfolioData.internships && portfolioData.internships.length > 0 && (
           <section id="internships" className="section">
             <h2 className="section-title"><FaBriefcase className="icon" /> Internship & Experience</h2>
@@ -228,27 +278,32 @@ function App() {
             <form className="contact-form" onSubmit={handleSubmit}>
               <input 
                 type="text" 
-                placeholder="Your Name" 
+                name="name"
                 value={formData.name}
-                onChange={(e) => setFormData({...formData, name: e.target.value})}
+                onChange={handleChange}
+                placeholder="Your Name" 
                 required 
               />
               <input 
                 type="email" 
-                placeholder="Your Email" 
+                name="email"
                 value={formData.email}
-                onChange={(e) => setFormData({...formData, email: e.target.value})}
+                onChange={handleChange}
+                placeholder="Your Email" 
                 required 
               />
               <textarea 
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
                 rows="4" 
                 placeholder="Type Message" 
-                value={formData.message}
-                onChange={(e) => setFormData({...formData, message: e.target.value})}
                 required
               ></textarea>
-              <button type="submit" className="btn btn-primary">Send Message</button>
-              {submitted && <p className="success-msg">Message sent successfully!</p>}
+              <button type="submit" className="btn btn-primary" disabled={loading}>
+                {loading ? "Sending..." : "Send Message"}
+              </button>
+              {submitted && <p className="success-msg">Message sent directly to inbox!</p>}
             </form>
           </div>
         </section>
