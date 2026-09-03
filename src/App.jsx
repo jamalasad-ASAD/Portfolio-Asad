@@ -127,63 +127,79 @@ function App() {
           {menuOpen ? <FaXmark size={24} /> : <FaBars size={24} />}
         </button>
 
-        <div className={`nav-links ${menuOpen ? 'active' : ''}`}>
-          <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
-          <a href="#skills" onClick={() => setMenuOpen(false)}>Skills</a>
-          <a href="#internships" onClick={() => setMenuOpen(false)}>Internships</a>
-          <a href="#projects" onClick={() => setMenuOpen(false)}>Projects</a>
-          <a href="#education" onClick={() => setMenuOpen(false)}>Education</a>
-          <a href="#resume" onClick={() => setMenuOpen(false)}>Resume</a>
-          <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
+        {/* Middle Capsule/Circle Container for Navigation Links */}
+        <div className={`nav-links-wrapper ${menuOpen ? 'active' : ''}`}>
+          <div className="nav-links">
+            <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
+            <a href="#skills" onClick={() => setMenuOpen(false)}>Skills</a>
+            <a href="#internships" onClick={() => setMenuOpen(false)}>Internships</a>
+            <a href="#projects" onClick={() => setMenuOpen(false)}>Projects</a>
+            <a href="#education" onClick={() => setMenuOpen(false)}>Education</a>
+            <a href="#resume" onClick={() => setMenuOpen(false)}>Resume</a>
+            <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
+          </div>
+        </div>
+
+        {/* Outer Right Action Button */}
+        <div className="navbar-action">
+          <a href="#contact" className="btn-hire-me">Hire Me</a>
         </div>
       </nav>
 
       <main className="container">
         {/* Hero / About Section */}
         <section id="about" className="hero-section">
-          <div className="profile-img-container">
-            <img 
-              src={profilePic} 
-              alt={portfolioData.name} 
-              className="profile-img" 
-            />
-          </div>
+          <div className="hero-content">
+            {/* Left Side: 3D Image */}
+            <div className="hero-left">
+              <div className="profile-img-3d-wrapper">
+                <img 
+                  src={profilePic} 
+                  alt={portfolioData.name} 
+                  className="profile-img-3d" 
+                />
+              </div>
+            </div>
 
-          <div className="fresher-badge">Fresher • Open to Opportunities</div>
-          
-          <h1 className="hero-white-title">
-            Hi, I'm <Typewriter text={portfolioData.name} speed={120} pause={1500} />
-          </h1>
-          
-          <h2>{portfolioData.role}</h2>
-          <p className="bio">{portfolioData.bio}</p>
+            {/* Right Side: Details */}
+            <div className="hero-right">
+              <div className="fresher-badge">Fresher • Open to Opportunities</div>
+              
+              <h1 className="hero-white-title">
+                Hi, I'm <Typewriter text={portfolioData.name} speed={120} pause={1500} />
+              </h1>
+              
+              <h2>{portfolioData.role}</h2>
+              <p className="bio">{portfolioData.bio}</p>
 
-          <div className="hero-buttons">
-            <a href="#projects" className="btn btn-primary">View My Projects</a>
-            <a href={resumeUrl} download="ASAD_JAMAL_Resume.pdf" className="btn btn-secondary flex-btn">
-              <FaDownload /> Download CV
-            </a>
-          </div>
+              <div className="hero-buttons">
+                <a href="#projects" className="btn btn-primary">View My Projects</a>
+                <a href={resumeUrl} download="ASAD_JAMAL_Resume.pdf" className="btn btn-secondary flex-btn">
+                  <FaDownload /> Download CV
+                </a>
+              </div>
 
-          {/* 🔗 Social Links */}
-          <div className="social-links">
-            <a 
-              href={portfolioData.contact.github || "https://github.com/jamalasad-ASAD"} 
-              target="_blank" 
-              rel="noreferrer" 
-              title="GitHub Profile"
-            >
-              <FaGithub size={22} />
-            </a>
-            <a 
-              href={portfolioData.contact.linkedin || "https://www.linkedin.com/in/asad-jamal-289a31248/"} 
-              target="_blank" 
-              rel="noreferrer" 
-              title="LinkedIn Profile"
-            >
-              <FaLinkedin size={22} />
-            </a>
-            <a href={`mailto:${portfolioData.contact.email}`} title="Email"><FaEnvelope size={22} /></a>
+              {/* 🔗 Social Links */}
+              <div className="social-links">
+                <a 
+                  href={portfolioData.contact.github || "https://github.com/jamalasad-ASAD"} 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  title="GitHub Profile"
+                >
+                  <FaGithub size={22} />
+                </a>
+                <a 
+                  href={portfolioData.contact.linkedin || "https://www.linkedin.com/in/asad-jamal-289a31248/"} 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  title="LinkedIn Profile"
+                >
+                  <FaLinkedin size={22} />
+                </a>
+                <a href={`mailto:${portfolioData.contact.email}`} title="Email"><FaEnvelope size={22} /></a>
+              </div>
+            </div>
           </div>
         </section>
 
