@@ -151,7 +151,7 @@ function App() {
 
           <div className="fresher-badge">Fresher • Open to Opportunities</div>
           
-          <h1>
+          <h1 className="hero-white-title">
             Hi, I'm <Typewriter text={portfolioData.name} speed={120} pause={1500} />
           </h1>
           
@@ -165,7 +165,7 @@ function App() {
             </a>
           </div>
 
-          {/* 🔗 Updated Social Links with GitHub Profile */}
+          {/* 🔗 Social Links */}
           <div className="social-links">
             <a 
               href={portfolioData.contact.github || "https://github.com/jamalasad-ASAD"} 
@@ -184,7 +184,6 @@ function App() {
               <FaLinkedin size={22} />
             </a>
             <a href={`mailto:${portfolioData.contact.email}`} title="Email"><FaEnvelope size={22} /></a>
-            {/* <a href={`tel:${portfolioData.contact.phone}`} title="Call Now"><FaPhone size={20} /></a> */}
           </div>
         </section>
 
