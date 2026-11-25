@@ -40,7 +40,9 @@ function Typewriter({ text, speed = 120, pause = 1500 }) {
         setDisplayedText(text.slice(0, displayedText.length - 1));
       }, speed / 2);
     } else if (isDeleting && displayedText.length === 0) {
-      setIsDeleting(false);
+      timeout = setTimeout(() => {
+        setIsDeleting(false);
+      }, 0);
     }
     return () => clearTimeout(timeout);
   }, [displayedText, isDeleting, text, speed, pause]);
@@ -190,7 +192,7 @@ function App() {
                   <FaGithub size={22} />
                 </a>
                 <a 
-                  href={portfolioData.contact.linkedin || "https://www.linkedin.com/in/asad-jamal-289a31248/"} 
+                  href={portfolioData.contact.linkedin || "https://www.linkedin.com/in/asad-jamal-289a31248"} 
                   target="_blank" 
                   rel="noreferrer" 
                   title="LinkedIn Profile"
@@ -257,7 +259,7 @@ function App() {
                 </div>
                 <div className="project-actions">
                   <a href={proj.github} target="_blank" rel="noreferrer" className="link-btn">Code (GitHub)</a>
-                  <a href={proj.live} target="_blank" rel="noreferrer" className="link-btn live-btn">Live Demo</a>
+                  {proj.live && <a href={proj.live} target="_blank" rel="noreferrer" className="link-btn live-btn">Live Demo</a>}
                 </div>
               </div>
             ))}

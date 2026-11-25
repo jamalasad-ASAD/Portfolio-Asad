@@ -86,32 +86,46 @@ export const portfolioData = {
   // 🚀 Projects Section (Linked to your GitHub profile)
   projects: [
     {
-      title: "Photography website",
-      description: "A responsive photography portfolio built with React featuring photo galleries and contact options.",
+      title: "MandiTruck",
+      description: "Truck booking and delivery management application.",
+      tech: ["React", "JavaScript", "CSS3"],
+      github: "https://github.com/jamalasad-ASAD/MandiTruck",
+      live: "https://mandi-truck.vercel.app"
+    },
+    {
+      title: "School Management System",
+      description: "School management system for managing students, staff, and records.",
+      tech: ["React", "JavaScript", "CSS3"],
+      github: "https://github.com/jamalasad-ASAD/school-management",
+      live: "https://school-management-std11.vercel.app"
+    },
+    {
+      title: "Cup2Eat",
+      description: "Food ordering application built with React.",
+      tech: ["React", "JavaScript", "CSS3"],
+      github: "https://github.com/jamalasad-ASAD/cup2eat",
+      live: ""
+    },
+    {
+      title: "Portfolio Asad",
+      description: "Personal portfolio website showcasing projects and skills.",
+      tech: ["React", "JavaScript", "CSS3"],
+      github: "https://github.com/jamalasad-ASAD/Portfolio-Asad",
+      live: "https://portfolio-asad-liard.vercel.app"
+    },
+    {
+      title: "Weather App",
+      description: "Weather forecast application fetching real-time data.",
+      tech: ["React", "JavaScript", "CSS3"],
+      github: "https://github.com/jamalasad-ASAD/weather-app",
+      live: ""
+    },
+    {
+      title: "Nadeem Photography",
+      description: "Responsive photography portfolio with photo galleries.",
       tech: ["React", "JavaScript", "CSS3"],
       github: "https://github.com/jamalasad-ASAD/nadeem-photography",
-      live: "https://nadeem-photography.vercel.app/"
-    },
-    {
-      title: "E-Commerce Web Application",
-      description: "A responsive online shopping site built with React. Features product search, category filtering, cart management, and local storage integration.",
-      tech: ["React", "JavaScript", "CSS3", "Context API"],
-      github: "https://github.com/jamalasad-ASAD",
-      live: "https://your-demo-link.netlify.app"
-    },
-    {
-      title: "Weather Forecast Dashboard",
-      description: "Fetches real-time weather data using OpenWeatherMap REST API. Displays 5-day forecast, humidity levels, and dynamic background changes.",
-      tech: ["React", "Fetch API", "Tailwind CSS"],
-      github: "https://github.com/jamalasad-ASAD",
-      live: "https://your-weather-demo.vercel.app"
-    },
-    {
-      title: "Task Tracker / To-Do App",
-      description: "Productivity application with CRUD operations, task categorization, and persistence using browser localStorage.",
-      tech: ["React", "JavaScript", "CSS Modules"],
-      github: "https://github.com/jamalasad-ASAD",
-      live: "https://your-todo-demo.netlify.app"
+      live: "https://nadeem-photography.vercel.app"
     }
   ],
 
@@ -119,7 +133,7 @@ export const portfolioData = {
   contact: {
     email: "jamalasadbth1@gmail.com",
     phone: "+91 9110151719",
-    github: "https://github.com/jamalasad-ASAD",
-    linkedin: "https://linkedin.com/in/yourusername" // <-- LinkedIn URL paste kar lena jab mil jaye
+    github:  "https://github.com/jamalasad-ASAD",
+    linkedin: "https://www.linkedin.com/in/asad-jamal-289a31248" // <-- LinkedIn URL paste kar lena jab mil jaye
   }
 };
